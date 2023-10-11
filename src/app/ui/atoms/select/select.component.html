@@ -1,0 +1,5 @@
+<select (change)="handleSelectChange($event)" class="p-2 w-full rounded-md border-stone">
+   <option *ngFor="let item of options;" [value]="item.id" class="p-1">
+      {{getItemName(item)}}
+   </option>
+</select>

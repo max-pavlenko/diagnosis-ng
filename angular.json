@@ -5,7 +5,30 @@
   "projects": {
     "diagnosis-ng": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular": {
+          "component": {
+            "changeDetection": "OnPush",
+            "style": "scss",
+            "skipTests": true,
+            "standalone": true
+          },
+          "directive": {
+            "skipTests": true,
+            "standalone": true
+          },
+          "pipe": {
+            "skipTests": true,
+            "standalone": true
+          },
+          "service": {
+            "skipTests": true
+          },
+          "guard": {
+            "skipTests": true
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -25,7 +48,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -87,7 +110,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
