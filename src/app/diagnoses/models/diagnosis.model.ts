@@ -4,7 +4,7 @@ export interface Diagnosis {
    id: number;
 }
 
-export interface NewDiagnoses {
+export interface DiagnosesForm {
    encounter: string,
    diagnoses: { diagnosis: Diagnosis, comment: string }[]
 }

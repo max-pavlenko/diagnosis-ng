@@ -86,7 +86,8 @@
               "browserTarget": "diagnosis-ng:build:production"
             },
             "development": {
-              "browserTarget": "diagnosis-ng:build:development"
+              "browserTarget": "diagnosis-ng:build:development",
+               "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

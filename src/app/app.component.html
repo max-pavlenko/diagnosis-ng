@@ -1,8 +1,8 @@
-<app-form-diagnoses (submitted)="handleDiagnosesSubmit($event)" [diagnosesOptions]="(diagnoses$ | async)!">
+<app-form-diagnoses (submitted)="handleDiagnosesSubmit($event)" [diagnosesOptions]="diagnoses$ | async">
    <h3 class="font-bold text-3xl mt-8 mb-2">Діагнози за ІСРС-2</h3>
 </app-form-diagnoses>
 <div class="mt-4">
    <h4 class="font-bold text-xl">JSON:</h4>
-   <textarea [value]="diagnosesDisclosure | json"
-             class="border-stone overflow-y-scroll text-stone-400 w-full min-h-[30dvh]" disabled></textarea>
+   <textarea [value]="diagnosesDisclosure | json" disabled
+             class="border-stone overflow-y-auto text-stone-400 w-full min-h-[30dvh]"></textarea>
 </div>

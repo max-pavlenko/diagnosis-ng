@@ -1,6 +1,7 @@
 <form (ngSubmit)="handleSubmit()" [formGroup]="form">
    <app-date-picker [min]="today" label="Date:" name="encounter"/>
    <ng-content/>
+
    <div *ngIf="!areDiagnoseOptionsAvailable; else diagnosesList">Loading diagnoses...</div>
    <ng-template #diagnosesList>
       <ul class="grid gap-1 max-h-[25dvh] overflow-y-auto" formArrayName="diagnoses">
@@ -10,7 +11,10 @@
             <app-input class="flex-1" name="comment" placeholder="comment"/>
          </li>
       </ul>
-      <app-button type="button" (click)="addDiagnosis()" class="border-none text-sm mt-1">+ Add more</app-button>
+
+      <app-button (click)="addDiagnosis()" class="border-none text-sm mt-1" type="button">+ Add more</app-button>
+      <app-button [disabled]="!diagnoses.length" (click)="removeDiagnosis()" class="border-none text-sm mt-1" type="button">- Remove last</app-button>
    </ng-template>
+
    <app-button [disabled]="form.invalid || !form.dirty" class="mt-2 w-full">Generate JSON</app-button>
 </form>

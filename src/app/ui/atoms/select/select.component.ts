@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Unique} from "../../../shared/types";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
-import {TransformerService} from "../../../shared/services/transformer.service";
+import {Unique} from '../../../shared/types';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
+import {TransformerService} from '../../../shared/services/transformer.service';
 
 @Component({
    selector: 'app-select',
@@ -17,7 +17,7 @@ import {TransformerService} from "../../../shared/services/transformer.service";
 })
 export class SelectComponent<T extends Unique> implements ControlValueAccessor, OnChanges {
    @Input({required: true}) options: T[] = [];
-   @Input({required: true}) getItemName = (item: T) => '';
+   @Input({required: true}) getItemName!: (item: T) => string;
 
    value?: T;
    optionsMap: ReturnType<typeof this.toIdMap> = {};

@@ -1,8 +1,8 @@
-export interface DiagnosisDisclosure {
-   encounter?: {
+export interface DiagnosesDisclosure {
+   encounter: {
       date: Date;
    };
-   conditions: Condition[]
+   conditions?: Condition[]
 }
 
 type Condition = {

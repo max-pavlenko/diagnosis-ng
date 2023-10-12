@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ButtonComponent} from "../../../ui/atoms/button/button.component";
-import {SelectComponent} from "../../../ui/atoms/select/select.component";
-import {DatePickerComponent} from "../../../ui/atoms/date-picker/date-picker.component";
-import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
-import {InputComponent} from "../../../ui/atoms/input/input.component";
-import {Diagnosis, NewDiagnoses} from "../../models/diagnosis.model";
+import {ButtonComponent} from '../../../ui/atoms/button/button.component';
+import {SelectComponent} from '../../../ui/atoms/select/select.component';
+import {DatePickerComponent} from '../../../ui/atoms/date-picker/date-picker.component';
+import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {InputComponent} from '../../../ui/atoms/input/input.component';
+import {DiagnosesForm, Diagnosis} from '../../models/diagnosis.model';
 
 @Component({
    selector: 'app-form-diagnoses',
@@ -17,12 +17,12 @@ import {Diagnosis, NewDiagnoses} from "../../models/diagnosis.model";
 })
 export class FormDiagnosesComponent implements OnChanges {
    @Input({required: true}) diagnosesOptions: Diagnosis[] | null = [];
-   @Output() submitted = new EventEmitter<NewDiagnoses>();
+   @Output() submitted = new EventEmitter<DiagnosesForm>();
 
    today = new Date();
    form = this.nnfb.group({
       encounter: ['', [Validators.required]],
-      diagnoses: this.nnfb.array([this.getDefaultDiagnosisGroup()], [Validators.required]),
+      diagnoses: this.nnfb.array([this.getDefaultDiagnosisGroup()]),
    });
 
    constructor(private nnfb: NonNullableFormBuilder) {}
@@ -33,6 +33,12 @@ export class FormDiagnosesComponent implements OnChanges {
 
    addDiagnosis() {
       this.form.controls.diagnoses.push(this.getDefaultDiagnosisGroup())
+   }
+
+   removeDiagnosis() {
+      if (this.diagnoses.length === 0) return;
+      const {length} = this.form.controls.diagnoses;
+      this.form.controls.diagnoses.removeAt(length - 1);
    }
 
    handleSubmit() {
