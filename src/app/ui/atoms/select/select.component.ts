@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Unique} from '../../../shared/types';
+import {Unique} from '../../../shared/types/utility';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {TransformerService} from '../../../shared/services/transformer.service';
 
@@ -20,7 +20,7 @@ export class SelectComponent<T extends Unique> implements ControlValueAccessor, 
    @Input({required: true}) getItemName!: (item: T) => string;
 
    value?: T;
-   optionsMap: ReturnType<typeof this.toIdMap> = {};
+   optionsIdMap: ReturnType<typeof this.toIdMap> = {};
    private onTouch!: () => void;
    private onModelChange!: (value: T) => void;
 
@@ -28,7 +28,7 @@ export class SelectComponent<T extends Unique> implements ControlValueAccessor, 
 
    ngOnChanges() {
       if (!this.options.length) return;
-      this.optionsMap = this.toIdMap();
+      this.optionsIdMap = this.toIdMap();
       this.writeValue(this.options[0]);
    }
 
@@ -49,7 +49,7 @@ export class SelectComponent<T extends Unique> implements ControlValueAccessor, 
    }
 
    setSelected(id: Unique['id']) {
-      const option = this.optionsMap[id];
+      const option = this.optionsIdMap[id];
       this.writeValue(option)
       this.onModelChange(option);
       this.onTouch();

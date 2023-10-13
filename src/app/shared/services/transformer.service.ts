@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Unique} from '../types';
+import {Unique} from '../types/utility';
 
 @Injectable({
    providedIn: 'root'
