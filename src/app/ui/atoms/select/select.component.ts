@@ -29,7 +29,6 @@ export class SelectComponent<T extends Unique> implements ControlValueAccessor, 
    ngOnChanges() {
       if (!this.options.length) return;
       this.optionsIdMap = this.toIdMap();
-      this.writeValue(this.options[0]);
    }
 
    toIdMap() {
