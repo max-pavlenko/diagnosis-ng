@@ -27,12 +27,23 @@ export class FormDiagnosesComponent implements OnChanges {
 
    constructor(private nnfb: NonNullableFormBuilder) {}
 
+   get diagnoses() {
+      return this.form.controls.diagnoses;
+   }
+
+   get areDiagnoseOptionsAvailable() {
+      return !!this.diagnosesOptions;
+   }
+
    ngOnChanges() {
-      this.diagnosesOptions && this.form.controls.diagnoses.at(0).patchValue({diagnosis: this.diagnosesOptions[0]});
+      if (!this.diagnosesOptions) return;
+      this.diagnoses.controls.forEach(control => {
+         control.patchValue({diagnosis: this.diagnosesOptions?.[0]});
+      });
    }
 
    addDiagnosis() {
-      this.form.controls.diagnoses.push(this.getDefaultDiagnosisGroup())
+      this.form.controls.diagnoses.push(this.getDefaultDiagnosisGroup());
    }
 
    removeDiagnosis() {
@@ -56,13 +67,5 @@ export class FormDiagnosesComponent implements OnChanges {
 
    getDiagnoseOptionName = ({code, name}: Diagnosis) => {
       return `${code} ${name}`;
-   }
-
-   get diagnoses() {
-      return this.form.controls.diagnoses;
-   }
-
-   get areDiagnoseOptionsAvailable() {
-      return !!this.diagnosesOptions;
-   }
+   };
 }
